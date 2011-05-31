@@ -20,7 +20,7 @@ lines:
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 <remote name="busybox-android"
-        fetch="git://github.com/Gnurou/busybox-android.git"/>
+        fetch="git://github.com/Gnurou/"/>
 <project path="busybox-android"
          name="busybox-android"
 	 remote="busybox-android"
