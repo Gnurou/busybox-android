@@ -46,5 +46,5 @@ Non-executable .sh scripts are not meant to be run directly by the user.
 
 Feedback & contact
 ------------------
-Alexandre Courbot <gnurou@gmail.com>
+Alexandre Courbot <acourbot@nvidia.com>
 
