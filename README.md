@@ -13,7 +13,7 @@ rooted!) Android device, you can deploy busybox on it.
 
 Installing in your Android source tree
 --------------------------------------
-Simply add a local_manifest.xml file (or edit the existing one) in the .repo
+Simply add a 'local_manifest.xml' file (or edit the existing one) in the .repo
 directory located at the root of your Android source tree with the following
 lines:
 
@@ -21,10 +21,10 @@ lines:
     <manifest>
     <remote name="busybox-android"
             fetch="git://github.com/Gnurou/"/>
-        <project path="busybox-android"
-                 name="busybox-android"
-	         remote="busybox-android"
-	         revision="master"/>
+    <project path="busybox-android"
+             name="busybox-android"
+             remote="busybox-android"
+             revision="master"/>
     </manifest>
 
 Then run "repo sync" and build your images normally.
