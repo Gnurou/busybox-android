@@ -17,15 +17,15 @@ Simply add a local_manifest.xml file (or edit the existing one) in the .repo
 directory located at the root of your Android source tree with the following
 lines:
 
-<?xml version="1.0" encoding="UTF-8"?>
-<manifest>
-<remote name="busybox-android"
-        fetch="git://github.com/Gnurou/"/>
-<project path="busybox-android"
-         name="busybox-android"
-	 remote="busybox-android"
-	 revision="master"/>
-</manifest>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <manifest>
+    <remote name="busybox-android"
+            fetch="git://github.com/Gnurou/"/>
+        <project path="busybox-android"
+                 name="busybox-android"
+	         remote="busybox-android"
+	         revision="master"/>
+    </manifest>
 
 Then run "repo sync" and build your images normally.
 
