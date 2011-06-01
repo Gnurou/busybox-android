@@ -1,3 +1,29 @@
+diff -ru busybox-1.18.4/include/libbb.h busybox-1.18.4-android/include/libbb.h
+--- busybox-1.18.4/include/libbb.h	2011-03-13 10:45:40.000000000 +0900
++++ busybox-1.18.4-android/include/libbb.h	2011-06-01 19:40:06.176597931 +0900
+@@ -1643,7 +1643,7 @@
+  * use bb_default_login_shell and following defines.
+  * If you change LIBBB_DEFAULT_LOGIN_SHELL,
+  * don't forget to change increment constant. */
+-#define LIBBB_DEFAULT_LOGIN_SHELL  "-/bin/sh"
++#define LIBBB_DEFAULT_LOGIN_SHELL  "-/system/bin/sh"
+ extern const char bb_default_login_shell[];
+ /* "/bin/sh" */
+ #define DEFAULT_SHELL              (bb_default_login_shell+1)
+Only in busybox-1.18.4-android/include: NUM_APPLETS.h
+Only in busybox-1.18.4-android/include: usage.h
+diff -ru busybox-1.18.4/init/init.c busybox-1.18.4-android/init/init.c
+--- busybox-1.18.4/init/init.c	2011-03-13 10:45:40.000000000 +0900
++++ busybox-1.18.4-android/init/init.c	2011-06-01 19:40:37.209930427 +0900
+@@ -992,7 +992,7 @@
+ 	/* Make sure environs is set to something sane */
+ 	putenv((char *) "HOME=/");
+ 	putenv((char *) bb_PATH_root_path);
+-	putenv((char *) "SHELL=/bin/sh");
++	putenv((char *) "SHELL=/system/bin/sh");
+ 	putenv((char *) "USER=root"); /* needed? why? */
+ 
+ 	if (argv[1])
 diff -ru busybox-1.18.4/shell/ash.c busybox-1.18.4-android/shell/ash.c
 --- busybox-1.18.4/shell/ash.c	2011-03-13 10:45:40.000000000 +0900
 +++ busybox-1.18.4-android/shell/ash.c	2011-05-12 10:37:16.020132392 +0900
