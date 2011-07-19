@@ -346,8 +346,7 @@ LOCAL_MODULE := busybox
 
 BUSYBOX_INSTALL_DIR := $(TARGET_OUT)/bin
 BUSYBOX_BINARY := $(BUSYBOX_INSTALL_DIR)/busybox
-BUSYBOX_LOCAL_BINARY := $(LOCAL_PATH)/busybox
-BUSYBOX_INSTALL_SCRIPT := $(LOCAL_PATH)/local-install.sh
+BUSYBOX_LOCAL_BINARY := $(LOCAL_PATH)/busybox-android
 # This dependency ensures busybox is installed after all toolbox symlinks
 # are done, and overwrites them
 $(BUSYBOX_BINARY): toolbox

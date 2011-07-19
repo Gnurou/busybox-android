@@ -31,8 +31,8 @@ Then run "repo sync" and build your images normally.
 
 Installing on an already-deployed Android device
 ------------------------------------------------
-Run the 'install.sh' script while your device is connected. This will remount
-the system partition read-write, copy busybox, and make the appropriate
+Run the 'android-install.sh' script while your device is connected. This will
+remount the system partition read-write, copy busybox, and make the appropriate
 symlinks on your device. You will need adb in your path for this to work.
 
 Misc
@@ -40,7 +40,7 @@ Misc
 The files busybox-android.patch and busybox.config are a patch that allows ash
 history to work on Android and the configuration used to build Busybox,
 respectively. The busybox binary has been built statically against glibc -
-unfortunately, it seems impossible to build it against Android's NDK.
+unfortunately, it seems impossible to build it against Android NDK.
 
 Non-executable .sh scripts are not meant to be run directly by the user.
 
