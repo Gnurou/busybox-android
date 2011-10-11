@@ -37,10 +37,10 @@ symlinks on your device. You will need adb in your path for this to work.
 
 Misc
 ----
-The files busybox-android.patch and busybox.config are a patch that allows ash
-history to work on Android and the configuration used to build Busybox,
-respectively. The busybox binary has been built statically against glibc -
-unfortunately, it seems impossible to build it against Android NDK.
+The files busybox-android.patch and busybox-android.config are a patch that
+allows ash history to work on Android and the configuration used to build
+Busybox, respectively. The busybox binary has been built statically against
+glibc - unfortunately, it seems impossible to build it against Android NDK.
 
 Non-executable .sh scripts are not meant to be run directly by the user.
 
