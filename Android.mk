@@ -1,6 +1,8 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
+# List obtained using
+# adb shell busybox --list |sed 's/.$/ \\/' |sed 's/^/\t/'
 BUSYBOX_TOOLS := \
 	[ \
 	[[ \
@@ -103,6 +105,7 @@ BUSYBOX_TOOLS := \
 	getopt \
 	getty \
 	grep \
+	groups \
 	gunzip \
 	gzip \
 	halt \
@@ -141,7 +144,6 @@ BUSYBOX_TOOLS := \
 	killall5 \
 	klogd \
 	last \
-	length \
 	less \
 	linux32 \
 	linux64 \
@@ -220,7 +222,9 @@ BUSYBOX_TOOLS := \
 	printf \
 	ps \
 	pscan \
+	pstree \
 	pwd \
+	pwdx \
 	raidautorun \
 	rdate \
 	rdev \
@@ -257,6 +261,7 @@ BUSYBOX_TOOLS := \
 	setfont \
 	setkeycodes \
 	setlogcons \
+	setserial \
 	setsid \
 	setuidgid \
 	sh \
@@ -274,7 +279,6 @@ BUSYBOX_TOOLS := \
 	stat \
 	strings \
 	stty \
-	su \
 	sulogin \
 	sum \
 	sv \
@@ -320,6 +324,7 @@ BUSYBOX_TOOLS := \
 	unxz \
 	unzip \
 	uptime \
+	users \
 	usleep \
 	uudecode \
 	uuencode \
@@ -335,6 +340,7 @@ BUSYBOX_TOOLS := \
 	which \
 	who \
 	whoami \
+	whois \
 	xargs \
 	xz \
 	xzcat \
