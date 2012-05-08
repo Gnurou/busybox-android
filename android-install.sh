@@ -38,7 +38,7 @@ function doMain()
     # move the files over to an adb writable location
     adb push $LOCAL_DIR/busybox-android $TMP/
     adb push $LOCAL_DIR/$SCRIPT $TMP/
-    
+
     # now execute a string of commands over one adb connection using a
     # so-called here document
     # redirect chatter to /dev/null -- adb apparently puts stdin and stderr in
@@ -51,7 +51,7 @@ cat $TMP/busybox-android > $TGT/busybox
 chmod 755 $TGT/busybox
 cat $TMP/$SCRIPT > $TGT/$SCRIPT
 rm $TMP/$SCRIPT
-cd $TGT                                 
+cd $TGT
 chmod 755 $SCRIPT
 busybox ash $TGT/$SCRIPT
 rm $TGT/$SCRIPT
