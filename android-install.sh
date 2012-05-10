@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# ryan:
 # I modified the original script as below for use with my rooted Atrix phone.
 # I'm using a retail build that still thinks it's a production device.
 # The best way to state this is that ro.secure=1 in default.prop, but su
@@ -20,54 +21,47 @@
 #   $ su
 #   $ ls /data/app/
 #
+# Gnurou:
+# Another issue is that some devices come with most basic commands like mount
+# removed, which requires us to use BB to remount /system read-write. This is
+# why we first upload BB to a temporary, executable location before moving it
+# to /system/bin
 
 LOCAL_DIR=`dirname $0`
 SCRIPT='android-remote-install.sh'
-TMP='/sdcard'
+# /data is preferred over /sdcard because it will allow us to execute BB
+TMP='/data'
+TMPBB=$TMP/busybox
 TGT='/system/bin'
-
-function execMount()
-{
-    local cmd="$@"
-    local output=
-    "mount -o remount,rw /system"
-}
+TGTBB=$TGT/busybox
 
 function doMain()
 {
     # move the files over to an adb writable location
-    adb push $LOCAL_DIR/busybox-android $TMP/
+    adb push $LOCAL_DIR/busybox-android $TMPBB
     adb push $LOCAL_DIR/$SCRIPT $TMP/
 
     # now execute a string of commands over one adb connection using a
     # so-called here document
     # redirect chatter to /dev/null -- adb apparently puts stdin and stderr in
     # stdin so to add error checking we'd need to scan all the text
-adb shell <<DONE
+    adb shell <<DONE
 su
 # this is a remount form that works on "partially rooted devices"
-mount -o remount,rw /system
-cat $TMP/busybox-android > $TGT/busybox
-chmod 755 $TGT/busybox
-cat $TMP/$SCRIPT > $TGT/$SCRIPT
-rm $TMP/$SCRIPT
-cd $TGT
-chmod 755 $SCRIPT
-busybox ash $TGT/$SCRIPT
-rm $TGT/$SCRIPT
-
-# cleanup
-rm $TMP/busybox-android
-
-mount -o remount,r /system
+$TMPBB mount -o remount,rw /system
+# move BB to its final location
+$TMPBB cp $TMPBB $TGTBB
+$TGTBB rm $TMPBB
+$TGTBB ash $TMP/$SCRIPT
+$TGTBB rm $TMP/$SCRIPT
+$TGTBB sync
 exit
 exit
 
 DONE
-
+    # needs to be done separately to avoid "device busy" error
+    adb shell mount -o remount,ro /system
 }
 
-set -x
 doMain
-set +x
 
