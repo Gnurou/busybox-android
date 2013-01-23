@@ -1,21 +1,21 @@
 diff --git a/include/libbb.h b/include/libbb.h
-index f79b693..1604777 100644
+index e520060..82af1c3 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
-@@ -1734,7 +1734,7 @@ extern struct globals *const ptr_to_globals;
+@@ -1764,7 +1764,7 @@ extern struct globals *const ptr_to_globals;
   * use bb_default_login_shell and following defines.
   * If you change LIBBB_DEFAULT_LOGIN_SHELL,
   * don't forget to change increment constant. */
 -#define LIBBB_DEFAULT_LOGIN_SHELL  "-/bin/sh"
 +#define LIBBB_DEFAULT_LOGIN_SHELL  "-/system/bin/sh"
- extern const char bb_default_login_shell[];
+ extern const char bb_default_login_shell[] ALIGN1;
  /* "/bin/sh" */
  #define DEFAULT_SHELL              (bb_default_login_shell+1)
 diff --git a/init/init.c b/init/init.c
-index 645f694..6be57fb 100644
+index b84bdcc..144a70d 100644
 --- a/init/init.c
 +++ b/init/init.c
-@@ -993,7 +993,7 @@ int init_main(int argc UNUSED_PARAM, char **argv)
+@@ -1047,7 +1047,7 @@ int init_main(int argc UNUSED_PARAM, char **argv)
  	/* Make sure environs is set to something sane */
  	putenv((char *) "HOME=/");
  	putenv((char *) bb_PATH_root_path);
@@ -25,10 +25,10 @@ index 645f694..6be57fb 100644
  
  	if (argv[1])
 diff --git a/shell/ash.c b/shell/ash.c
-index 14472cb..2fbaece 100644
+index 31fbc55..cd405eb 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -13153,20 +13153,17 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -13213,20 +13213,17 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  	if (iflag) {
  		const char *hp = lookupvar("HISTFILE");
  		if (!hp) {
@@ -53,3 +53,4 @@ index 14472cb..2fbaece 100644
   state1:
  		state = 2;
  		read_profile(".profile");
+
