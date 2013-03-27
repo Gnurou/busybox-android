@@ -57,7 +57,7 @@ DONE
     # we should be mounted r/w, push BB
     adb push $LOCALBB $TGTBB
     # if push fails, try to upload to /data and copy from there
-    if [ $? -ne 0]; then
+    if [ $? -ne 0 ]; then
 	    adb push $LOCALBB $TMPBB
 	    adb shell <<DONE
 su
