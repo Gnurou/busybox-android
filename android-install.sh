@@ -28,7 +28,8 @@
 # to /system/bin
 
 LOCAL_DIR=`dirname $0`
-LOCALBB=${LOCAL_DIR}/busybox-android
+BBNAME=busybox-android
+LOCALBB=${LOCAL_DIR}/${BBNAME}
 SCRIPT='android-remote-install.sh'
 # /data is preferred over /sdcard because it will allow us to execute BB
 TMP='/data/'
@@ -46,7 +47,8 @@ function doMain()
         adb push $LOCALBB $TMPBB
 	adb shell <<DONE
 su
-$TMPBB mount -o remount,rw /system
+mount -oremount,rw /system
+$TMPBB mount -oremount,rw /system
 $TMPBB rm $TMPBB
 exit
 exit
@@ -56,11 +58,15 @@ DONE
 
     # we should be mounted r/w, push BB
     adb push $LOCALBB $TGTBB
-    # if push fails, try to upload to /data and copy from there
+    # if push fails, try to upload to /sdcard and copy from there
     if [ $? -ne 0 ]; then
 	    adb push $LOCALBB $TMPBB
+	    adb push $LOCALBB /sdcard/
 	    adb shell <<DONE
 su
+cp /sdcard/$BBNAME $TGTBB
+chmod 755 $TGTBB
+rm /sdcard/$BBNAME
 $TMPBB cp $TMPBB $TGTBB
 $TMPBB rm $TMPBB
 exit
